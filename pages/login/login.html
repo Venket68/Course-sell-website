@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Coderclas</title>
+    <link rel="stylesheet" href="../../styles/universal.css" />
+    <link rel="stylesheet" href="../../styles/navbar.css" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="../../styles/footer.css" />
+    <link rel="stylesheet" href="../../styles/colors.css" />
+</head>
+<body class="dark">
+
+    <header>
+        <nav style="position: fixed; top: 0; width: 100%">
+          <div class="nav-bar">
+            <li class="logo">
+              <a href="#">
+                <!-- <img id="topLogo" src="update/download (1).png" alt="CoderClas Main Logo" /> -->
+                 <span class="tt" style="color: white;font-size:xx-large;">LearnNow</span>
+              <script>
+                // Toggle logo text color based on theme
+                document.addEventListener('DOMContentLoaded', function() {
+                  function updateLogoColor() {
+                    var body = document.body;
+                    var logoSpan = document.querySelector('.logo .tt');
+                    if (!logoSpan) return;
+                    if (body.classList.contains('dark')) {
+                      logoSpan.style.color = 'white';
+                    } else {
+                      logoSpan.style.color = 'black';
+                    }
+                  }
+  
+                  // Initial set
+                  updateLogoColor();
+  
+                  // Listen for theme toggle (checkbox)
+                  var themeToggle = document.getElementById('hide_checkbox');
+                  if (themeToggle) {
+                    themeToggle.addEventListener('change', function() {
+                      // Toggle dark class on body
+                      if (themeToggle.checked) {
+                        document.body.classList.add('dark');
+                      } else {
+                        document.body.classList.remove('dark');
+                      }
+                      updateLogoColor();
+                    });
+                  }
+                });
+              </script>
+              </a>
+            </li>
+  
+            <div style="display: flex">
+              <div class="wrapper">
+                <input type="checkbox" id="hide_checkbox" checked />
+                <label for="hide_checkbox" class="toggle">
+                  <span class="toggle-button">
+                    <span class="crater crater-1"></span>
+                    <span class="crater crater-2"></span>
+                    <span class="crater crater-3"></span>
+                    <span class="crater crater-4"></span>
+                    <span class="crater crater-5"></span>
+                    <span class="crater crater-6"></span>
+                    <span class="crater crater-7"></span>
+                  </span>
+                  <span class="star star-1"></span>
+                  <span class="star star-2"></span>
+                  <span class="star star-3"></span>
+                  <span class="star star-4"></span>
+                  <span class="star star-5"></span>
+                  <span class="star star-6"></span>
+                  <span class="star star-7"></span>
+                  <span class="star star-8"></span>
+                </label>
+              </div>
+  
+              <input type="checkbox" id="check" />
+              <span class="menu font-sans">
+                <li>
+                  <a class="text-white text-center" href="/course-selling-website-master/index.html">Home</a>
+                </li>
+                <li>
+                  <a
+                    class="text-white text-center"
+                    href="/course-selling-website-master/pages/contact us/contact.html"
+                    >Contact Us</a
+                  >
+                </li>
+                <li>
+                  <a class="text-white text-center" href="/course-selling-website-master/pages/about us/about.html">About Us</a>
+                </li>
+                <li>
+                  <a href="../login/login.html" rel="noopener noreferrer">
+                  <button class="btn-design text-bold">Login</button></a>
+                </li>
+                <label for="check" class="close-menu">
+                  <i class="text-white fas fa-times"></i>
+                </label>
+              </span>
+            </div>
+  
+            <label for="check" class="open-menu">
+              <i class="text-white fas fa-bars"></i>
+            </label>
+          </div>
+        </nav>
+      </header>
+    <div class="login-section">
+       <br><br><br>
+        <div class="login-box">
+            <p class="login-title">Log in</p>
+            <p class="login-subtitle">to start learning</p>
+            <form method="POST" class="form" action="#">
+                <label for="username">Username</label>
+                <input type="text" name="userame" id="username">
+
+                <label for="password">Password</label>
+                <input type="password" name="password" id="password">
+                <a class="forget" href="#">Forget Password?</a>
+
+                <input id="submit" type="submit" value="Login">
+            </form>
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
