@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Free Courses Page</title>
+  <link rel="stylesheet" href="../../styles/universal.css" />
+  <link rel="stylesheet" href="../../styles/colors.css" />
+  <link rel="stylesheet" href="../../styles/navbar.css" />
+  <link rel="stylesheet" href="../../styles/footer.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <style>
+    body {
+      background: var(--primary-bg, #181818);
+      color: var(--primary-text, #fff);
+      font-family: 'Poppins', 'Segoe UI', Arial, sans-serif;
+      margin: 0;
+      min-height: 100vh;
+    }
+    .main-container {
+      margin-top: 70px;
+      padding: 32px 5vw 32px 5vw;
+      min-height: 100vh;
+      box-sizing: border-box;
+      animation: fadeIn 1s;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(40px);}
+      to { opacity: 1; transform: translateY(0);}
+    }
+    .courses-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 32px;
+      margin: 0 auto;
+      max-width: 900px;
+    }
+    @media (max-width: 900px) {
+      .courses-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+    }
+    .course-card {
+      background: #23272f;
+      border-radius: 18px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+      padding: 24px 20px 20px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      position: relative;
+      transition: box-shadow 0.3s, transform 0.2s;
+      cursor: pointer;
+      overflow: hidden;
+      min-height: 260px;
+      animation: cardPop 0.7s cubic-bezier(.68,-0.55,.27,1.55);
+    }
+    .course-card:hover {
+      box-shadow: 0 8px 32px rgba(241,196,15,0.25);
+      transform: translateY(-8px) scale(1.03);
+      background: #292d36;
+    }
+    @keyframes cardPop {
+      0% { opacity: 0; transform: scale(0.95) translateY(30px);}
+      100% { opacity: 1; transform: scale(1) translateY(0);}
+    }
+    .course-card .icon {
+      font-size: 2.5rem;
+      color: #f1c40f;
+      margin-bottom: 18px;
+      transition: color 0.2s;
+    }
+    .course-card:hover .icon {
+      color: #f39c12;
+    }
+    .course-title {
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin-bottom: 10px;
+      color: #fff;
+      letter-spacing: 0.5px;
+    }
+    .course-desc {
+      font-size: 1.05rem;
+      color: #d3d3d3;
+      margin-bottom: 18px;
+      flex: 1;
+    }
+    .course-link {
+      display: inline-block;
+      background: #f1c40f;
+      color: #181818;
+      font-weight: 600;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 22px;
+      text-decoration: none;
+      font-size: 1rem;
+      transition: background 0.2s, color 0.2s;
+      box-shadow: 0 2px 8px rgba(241,196,15,0.10);
+      margin-top: 8px;
+    }
+    .course-link:hover {
+      background: #fff;
+      color: #f1c40f;
+    }
+    /* Navbar Responsive */
+    @media (max-width: 600px) {
+      .main-container {
+        padding: 12px 0;
+      }
+      .courses-grid {
+        gap: 14px;
+      }
+      .course-card {
+        padding: 16px 8px 16px 12px;
+        min-height: 180px;
+      }
+      .course-title {
+        font-size: 1.1rem;
+      }
+      .course-desc {
+        font-size: 0.98rem;
+      }
+    }
+  </style>
+</head>
+<body class="dark">
+  <!-- Navbar (reuse from previous page) -->
+  <header>
+    <nav style="position: fixed; top: 0; width: 100%; z-index: 10;">
+      <div class="nav-bar">
+        <li class="logo">
+          <a href="/index.html">
+            <span class="tt" style="color: white;font-size:xx-large;">LearnNow</span>
+          </a>
+        </li>
+        <div style="display: flex;">
+          <div class="wrapper">
+            <input type="checkbox" id="hide_checkbox" checked>
+            <label for="hide_checkbox" class="toggle">
+              <span class="toggle-button">
+                <span class="crater crater-1"></span>
+                <span class="crater crater-2"></span>
+                <span class="crater crater-3"></span>
+                <span class="crater crater-4"></span>
+                <span class="crater crater-5"></span>
+                <span class="crater crater-6"></span>
+                <span class="crater crater-7"></span>
+              </span>
+              <span class="star star-1"></span>
+              <span class="star star-2"></span>
+              <span class="star star-3"></span>
+              <span class="star star-4"></span>
+              <span class="star star-5"></span>
+              <span class="star star-6"></span>
+              <span class="star star-7"></span>
+              <span class="star star-8"></span>
+            </label>
+          </div>
+          <input type="checkbox" id="check" />
+          <span class="menu font-sans">
+            <li>
+              <a class="text-white text-center" href="../../index.html#courses">Courses</a>
+            </li>
+            <li>
+              <a class="text-white text-center" href="/pages/contact us/contact.html">Contact Us</a>
+            </li>
+            <li>
+              <a class="text-white text-center" href="/pages/about us/about.html">About Us</a>
+            </li>
+            <li>
+              <a href="/pages/login/login.html">
+                <button class="btn-design text-bold">Login</button>
+              </a>
+            </li>
+            <label for="check" class="close-menu">
+              <i class="text-white fas fa-times"></i>
+            </label>
+          </span>
+        </div>
+        <label for="check" class="open-menu">
+          <i class="text-white fas fa-bars"></i>
+        </label>
+      </div>
+    </nav>
+  </header>
+  <div style="height: 70px;"></div>
+  <div class="main-container">
+    <h2 style="text-align:center; margin-bottom: 32px; font-size:2rem; letter-spacing:1px;">Free Courses</h2>
+    <div class="courses-grid">
+      <!-- Card 1 -->
+      <div class="course-card" onclick="window.location.href='Html-css-page.html'">
+        <span class="icon"><i class="fab fa-html5"></i> <i class="fab fa-css3-alt"></i></span>
+        <div class="course-title">HTML &amp; CSS Mastery</div>
+        <div class="course-desc">
+          Learn the building blocks of the web! This course covers everything from basic HTML tags to advanced CSS layouts and animations. Perfect for beginners and those looking to polish their web design skills.
+        </div>
+        <a class="course-link" href="Html-css-page.html">Start Learning</a>
+      </div>
+      <!-- Card 2 -->
+      <div class="course-card" onclick="window.location.href='javascript-course.html'">
+        <span class="icon"><i class="fab fa-js-square"></i></span>
+        <div class="course-title">JavaScript Essentials</div>
+        <div class="course-desc">
+          Dive into JavaScript, the language of the web! This course takes you from the basics to interactive web features, DOM manipulation, and real-world projects. No prior coding experience required.
+        </div>
+        <a class="course-link" href="javascript-course.html">Start Learning</a>
+      </div>
+    </div>
+  </div>
+  <script>
+    // Theme toggle for logo color (reuse)
+    document.addEventListener('DOMContentLoaded', function() {
+      function updateLogoColor() {
+        var body = document.body;
+        var logoSpan = document.querySelector('.logo .tt');
+        if (!logoSpan) return;
+        if (body.classList.contains('dark')) {
+          logoSpan.style.color = 'white';
+        } else {
+          logoSpan.style.color = 'black';
+        }
+      }
+      updateLogoColor();
+      var themeToggle = document.getElementById('hide_checkbox');
+      if (themeToggle) {
+        themeToggle.addEventListener('change', function() {
+          if (themeToggle.checked) {
+            document.body.classList.add('dark');
+          } else {
+            document.body.classList.remove('dark');
+          }
+          updateLogoColor();
+        });
+      }
+    });
+  </script>
+</body>
+</html>

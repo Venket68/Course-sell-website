@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>JavaScript Demo Course - Watch Online</title>
+  <link rel="stylesheet" href="../../styles/universal.css" />
+  <link rel="stylesheet" href="../../styles/colors.css" />
+  <link rel="stylesheet" href="../../styles/navbar.css" />
+  <link rel="stylesheet" href="../../styles/footer.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <style>
+    :root {
+      --primary-bg: #181818;
+      --primary-text: #fff;
+      --accent: #f1c40f;
+      --box-bg: #23272f;
+      --box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+      --box-shadow-hover: 0 8px 32px rgba(0,0,0,0.28);
+      --transition: 0.3s cubic-bezier(.4,2,.6,1);
+    }
+    body {
+      background: var(--primary-bg);
+      color: var(--primary-text);
+      font-family: 'Poppins', 'Segoe UI', Arial, sans-serif;
+      margin: 0;
+      min-height: 100vh;
+      transition: background 0.4s;
+    }
+    .main-container {
+      margin-top: 50px;
+      display: flex;
+      flex-direction: row;
+      gap: 32px;
+      padding: 32px 5vw 32px 5vw;
+      min-height: 100vh;
+      box-sizing: border-box;
+      animation: fadeIn 1s;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(40px);}
+      to { opacity: 1; transform: translateY(0);}
+    }
+    .video-section {
+      flex: 2;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      min-width: 0;
+    }
+    .video-player-box {
+      background: var(--box-bg);
+      border-radius: 18px;
+      box-shadow: var(--box-shadow);
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      transition: box-shadow var(--transition);
+      min-width: 0;
+      animation: popIn 0.7s;
+    }
+    .video-player-box:focus-within, .video-player-box:hover {
+      box-shadow: var(--box-shadow-hover);
+    }
+    @keyframes popIn {
+      from { transform: scale(0.95); opacity: 0;}
+      to { transform: scale(1); opacity: 1;}
+    }
+    .video-js {
+      width: 100%;
+      max-width: 720px;
+      border-radius: 12px;
+      background: #000;
+      aspect-ratio: 16/9;
+      margin-bottom: 10px;
+      outline: none;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.18);
+      transition: box-shadow 0.2s;
+    }
+    .controls-bar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 8px;
+      justify-content: center;
+      width: 100%;
+    }
+    .controls-bar button {
+      background: #23272f;
+      border: none;
+      color: #fff;
+      font-size: 1.1rem;
+      border-radius: 6px;
+      padding: 8px 14px;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s, transform 0.15s;
+      outline: none;
+    }
+    .controls-bar button:active {
+      background: var(--accent);
+      color: #181818;
+      transform: scale(0.96);
+    }
+    .controls-bar .pin-btn.pinned {
+      background: var(--accent);
+      color: #181818;
+    }
+    .progress-bar {
+      width: 100%;
+      max-width: 720px;
+      height: 7px;
+      background: #333;
+      border-radius: 5px;
+      margin: 8px 0 0 0;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+    .progress {
+      height: 100%;
+      background: linear-gradient(90deg, #f1c40f 0%, #f39c12 100%);
+      width: 0%;
+      border-radius: 5px;
+      transition: width 0.2s;
+    }
+    .time-labels {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      max-width: 720px;
+      font-size: 0.98rem;
+      color: #bbb;
+      margin-top: 2px;
+      user-select: none;
+    }
+    .comment-section {
+      background: #23272f;
+      border-radius: 14px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.10);
+      padding: 18px;
+      margin-top: 18px;
+      animation: fadeIn 1.2s;
+    }
+    .comment-section h3 {
+      margin: 0 0 10px 0;
+      font-size: 1.1rem;
+      color: var(--accent);
+      letter-spacing: 0.5px;
+    }
+    .comment-list {
+      min-height: 32px;
+      margin-bottom: 10px;
+    }
+    .comment {
+      background: #181818;
+      color: #fff;
+      border-radius: 7px;
+      padding: 7px 12px;
+      margin-bottom: 6px;
+      font-size: 0.98rem;
+      animation: fadeIn 0.7s;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .comment .pin {
+      color: var(--accent);
+      margin-right: 4px;
+    }
+    .comment-form {
+      display: flex;
+      gap: 8px;
+      margin-top: 6px;
+    }
+    .comment-form input[type="text"] {
+      flex: 1;
+      border-radius: 6px;
+      border: none;
+      padding: 8px 12px;
+      font-size: 1rem;
+      background: #181818;
+      color: #fff;
+      outline: none;
+      transition: box-shadow 0.2s;
+    }
+    .comment-form button {
+      border-radius: 6px;
+      border: none;
+      padding: 8px 14px;
+      font-size: 1rem;
+      background: var(--accent);
+      color: #181818;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+    }
+    .comment-form button[type="button"] {
+      background: #f1c40f;
+      color: #181818;
+    }
+    .side-list-section {
+      flex: 1;
+      min-width: 220px;
+      max-width: 340px;
+      background: #23272f;
+      border-radius: 14px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.10);
+      padding: 18px 12px;
+      animation: fadeIn 1.2s;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      height: fit-content;
+    }
+    .side-list-section h3 {
+      margin: 0 0 10px 0;
+      color: var(--accent);
+      font-size: 1.1rem;
+      letter-spacing: 0.5px;
+    }
+    .video-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .video-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: #181818;
+      color: #fff;
+      border-radius: 7px;
+      padding: 10px 12px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background 0.18s, color 0.18s, transform 0.13s;
+      border-left: 4px solid transparent;
+      position: relative;
+      animation: fadeIn 0.7s;
+    }
+    .video-item.active {
+      background: #f1c40f;
+      color: #181818;
+      font-weight: 600;
+      border-left: 4px solid #f39c12;
+      transform: scale(1.03);
+    }
+    .video-item:hover:not(.active) {
+      background: #23272f;
+      color: #f1c40f;
+      border-left: 4px solid #f1c40f;
+      transform: scale(1.01);
+    }
+    .video-item i.fas.fa-check-circle {
+      color: #27ae60;
+      margin-left: auto;
+      font-size: 1.1em;
+    }
+    @media (max-width: 900px) {
+      .main-container {
+        flex-direction: column;
+        gap: 24px;
+        padding: 18px 2vw 18px 2vw;
+      }
+      .side-list-section {
+        max-width: 100vw;
+        width: 100%;
+        margin: 0 auto;
+      }
+      .video-player-box {
+        max-width: 100vw;
+      }
+    }
+    @media (max-width: 600px) {
+      .main-container {
+        padding: 8px 0 8px 0;
+      }
+      .video-player-box, .side-list-section, .comment-section {
+        padding: 10px 4vw;
+        border-radius: 10px;
+      }
+      .video-js, .progress-bar, .time-labels {
+        max-width: 100vw;
+      }
+      .controls-bar button, .comment-form button {
+        font-size: 0.98rem;
+        padding: 7px 10px;
+      }
+    }
+  </style>
+</head>
+<body class="dark">
+    <header>
+        <nav style="position: fixed; top: 0; width: 100%; z-index: 10;">
+          <div class="nav-bar">
+            <li class="logo">
+              <a href="../../index.html">
+                <span class="tt" style="color: white;font-size:xx-large;">LearnNow</span>
+              </a>
+            </li>
+            <div style="display: flex;">
+              <div class="wrapper">
+                <input type="checkbox" id="hide_checkbox" checked>
+                <label for="hide_checkbox" class="toggle">
+                  <span class="toggle-button">
+                    <span class="crater crater-1"></span>
+                    <span class="crater crater-2"></span>
+                    <span class="crater crater-3"></span>
+                    <span class="crater crater-4"></span>
+                    <span class="crater crater-5"></span>
+                    <span class="crater crater-6"></span>
+                    <span class="crater crater-7"></span>
+                  </span>
+                  <span class="star star-1"></span>
+                  <span class="star star-2"></span>
+                  <span class="star star-3"></span>
+                  <span class="star star-4"></span>
+                  <span class="star star-5"></span>
+                  <span class="star star-6"></span>
+                  <span class="star star-7"></span>
+                  <span class="star star-8"></span>
+                </label>
+              </div>
+              <input type="checkbox" id="check" />
+              <span class="menu font-sans">
+                <li>
+                  <a class="text-white text-center" href="#">Courses</a>
+                </li>
+                <li>
+                  <a class="text-white text-center" href="/pages/contact us/contact.html">Contact Us</a>
+                </li>
+                <li>
+                  <a class="text-white text-center" href="/pages/about us/about.html">About Us</a>
+                </li>
+                <li>
+                  <a href="/pages/login/login.html">
+                    <button class="btn-design text-bold">Login</button>
+                  </a>
+                </li>
+                <label for="check" class="close-menu">
+                  <i class="text-white fas fa-times"></i>
+                </label>
+              </span>
+            </div>
+            <label for="check" class="open-menu">
+              <i class="text-white fas fa-bars"></i>
+            </label>
+          </div>
+        </nav>
+      </header>
+  <div style="height: 70px;"></div>
+  <div class="main-container">
+    <!-- Video Player Section -->
+    <div class="video-section">
+      <div class="video-player-box" id="videoPlayerBox">
+        <video id="mainVideo" class="video-js" tabindex="0" poster="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=800&q=80">
+          <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4"/>
+          Your browser does not support the video tag.
+        </video>
+        <div class="controls-bar">
+          <button id="playPauseBtn" title="Play/Pause"><i class="fas fa-play"></i></button>
+          <button id="back10Btn" title="Back 10 seconds"><i class="fas fa-undo"></i>10s</button>
+          <button id="forward10Btn" title="Forward 10 seconds"><i class="fas fa-redo"></i>10s</button>
+          <button id="fullscreenBtn" title="Fullscreen"><i class="fas fa-expand"></i></button>
+          <button id="videoOptionsBtn" title="Video Options"><i class="fas fa-cog"></i></button>
+          <button id="pinBtn" class="pin-btn" title="Pin Video"><i class="fas fa-thumbtack"></i></button>
+        </div>
+        <div class="progress-bar" id="progressBar">
+          <div class="progress" id="progress"></div>
+        </div>
+        <div class="time-labels">
+          <span id="currentTime">0:00</span>
+          <span id="duration">0:00</span>
+        </div>
+      </div>
+      <!-- Comment Section -->
+      <div class="comment-section" id="commentSection">
+        <h3>Comments <i class="fas fa-comments"></i></h3>
+        <div class="comment-list" id="commentList">
+          <!-- Comments will appear here -->
+        </div>
+        <form class="comment-form" id="commentForm" autocomplete="off">
+          <input type="text" id="commentInput" placeholder="Add a comment..." maxlength="120"/>
+          <button type="submit">Send</button>
+          <button type="button" id="pinCommentBtn" title="Pin this comment" style="background:#f1c40f;color:#181818;"><i class="fas fa-thumbtack"></i></button>
+        </form>
+      </div>
+    </div>
+    <!-- Next Video List Section -->
+    <aside class="side-list-section">
+      <h3>Next Videos</h3>
+      <div class="video-list" id="videoList">
+        <!-- Video items will be rendered here -->
+      </div>
+    </aside>
+  </div>
+  <script>
+    // Video Data
+    const videos = [
+      {
+        title: "Introduction to JavaScript",
+        src: "https://www.w3schools.com/html/mov_bbb.mp4",
+        poster: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        title: "JavaScript Variables & Data Types",
+        src: "https://www.w3schools.com/html/movie.mp4",
+        poster: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        title: "Functions & Scope",
+        src: "https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-mp4-file.mp4",
+        poster: "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        title: "DOM Manipulation Basics",
+        src: "https://filesamples.com/samples/video/mp4/sample_640x360.mp4",
+        poster: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        title: "Events in JavaScript",
+        src: "https://www.w3schools.com/html/movie.mp4",
+        poster: "https://images.unsplash.com/photo-1503676382389-4809596d5290?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        title: "ES6 Features Overview",
+        src: "https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-mp4-file.mp4",
+        poster: "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        title: "Async JavaScript & Promises",
+        src: "https://filesamples.com/samples/video/mp4/sample_640x360.mp4",
+        poster: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        title: "APIs & Fetch Demo",
+        src: "https://www.w3schools.com/html/mov_bbb.mp4",
+        poster: "https://images.unsplash.com/photo-1461344577544-4e5dc9487184?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        title: "Project: To-Do List App",
+        src: "https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-mp4-file.mp4",
+        poster: "https://images.unsplash.com/photo-1465101178521-c1a9136a3b99?auto=format&fit=crop&w=800&q=80"
+      }
+    ];
+    let currentVideoIndex = 0;
+    let isPinned = false;
+    let pinnedComment = null;
+
+    // DOM Elements
+    const mainVideo = document.getElementById('mainVideo');
+    const playPauseBtn = document.getElementById('playPauseBtn');
+    const back10Btn = document.getElementById('back10Btn');
+    const forward10Btn = document.getElementById('forward10Btn');
+    const fullscreenBtn = document.getElementById('fullscreenBtn');
+    const videoOptionsBtn = document.getElementById('videoOptionsBtn');
+    const pinBtn = document.getElementById('pinBtn');
+    const progressBar = document.getElementById('progressBar');
+    const progress = document.getElementById('progress');
+    const currentTimeLabel = document.getElementById('currentTime');
+    const durationLabel = document.getElementById('duration');
+    const videoList = document.getElementById('videoList');
+    const commentList = document.getElementById('commentList');
+    const commentForm = document.getElementById('commentForm');
+    const commentInput = document.getElementById('commentInput');
+    const pinCommentBtn = document.getElementById('pinCommentBtn');
+    const videoPlayerBox = document.getElementById('videoPlayerBox');
+
+    // Video List Rendering
+    function renderVideoList() {
+      videoList.innerHTML = '';
+      videos.forEach((video, idx) => {
+        const div = document.createElement('div');
+        div.className = 'video-item' + (idx === currentVideoIndex ? ' active' : '');
+        div.innerHTML = `
+          <i class="fas fa-play"></i>
+          <span>${video.title}</span>
+          ${idx < currentVideoIndex ? '<i class="fas fa-check-circle" title="Watched"></i>' : ''}
+        `;
+        div.onclick = () => {
+          if (currentVideoIndex !== idx) {
+            loadVideo(idx);
+          }
+        };
+        videoList.appendChild(div);
+      });
+    }
+
+    // Load Video
+    function loadVideo(idx) {
+      currentVideoIndex = idx;
+      mainVideo.src = videos[idx].src;
+      mainVideo.poster = videos[idx].poster;
+      mainVideo.currentTime = 0;
+      mainVideo.play();
+      renderVideoList();
+      updatePlayPauseIcon();
+      setTimeout(updateProgress, 100);
+    }
+
+    // Play/Pause
+    function updatePlayPauseIcon() {
+      if (mainVideo.paused) {
+        playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+      } else {
+        playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+      }
+    }
+    playPauseBtn.onclick = () => {
+      if (mainVideo.paused) {
+        mainVideo.play();
+      } else {
+        mainVideo.pause();
+      }
+      updatePlayPauseIcon();
+    };
+    mainVideo.onplay = updatePlayPauseIcon;
+    mainVideo.onpause = updatePlayPauseIcon;
+
+    // Skip 10s
+    back10Btn.onclick = () => {
+      mainVideo.currentTime = Math.max(0, mainVideo.currentTime - 10);
+    };
+    forward10Btn.onclick = () => {
+      mainVideo.currentTime = Math.min(mainVideo.duration, mainVideo.currentTime + 10);
+    };
+
+    // Fullscreen
+    fullscreenBtn.onclick = () => {
+      if (mainVideo.requestFullscreen) {
+        mainVideo.requestFullscreen();
+      } else if (mainVideo.webkitRequestFullscreen) {
+        mainVideo.webkitRequestFullscreen();
+      } else if (mainVideo.msRequestFullscreen) {
+        mainVideo.msRequestFullscreen();
+      }
+    };
+
+    // Video Options (dummy)
+    videoOptionsBtn.onclick = () => {
+      alert("Video options coming soon!");
+    };
+
+    // Pin Video
+    pinBtn.onclick = () => {
+      isPinned = !isPinned;
+      if (isPinned) {
+        pinBtn.classList.add('pinned');
+        videoPlayerBox.style.position = 'fixed';
+        videoPlayerBox.style.bottom = '24px';
+        videoPlayerBox.style.right = '24px';
+        videoPlayerBox.style.zIndex = '1000';
+        videoPlayerBox.style.width = 'min(95vw, 400px)';
+        videoPlayerBox.style.maxWidth = '95vw';
+        videoPlayerBox.style.boxShadow = '0 8px 32px rgba(0,0,0,0.38)';
+        videoPlayerBox.style.transition = 'all 0.3s';
+      } else {
+        pinBtn.classList.remove('pinned');
+        videoPlayerBox.style.position = '';
+        videoPlayerBox.style.bottom = '';
+        videoPlayerBox.style.right = '';
+        videoPlayerBox.style.zIndex = '';
+        videoPlayerBox.style.width = '';
+        videoPlayerBox.style.maxWidth = '';
+        videoPlayerBox.style.boxShadow = '';
+      }
+    };
+
+    // Progress Bar
+    function updateProgress() {
+      const percent = (mainVideo.currentTime / mainVideo.duration) * 100;
+      progress.style.width = percent + '%';
+      currentTimeLabel.textContent = formatTime(mainVideo.currentTime);
+      durationLabel.textContent = formatTime(mainVideo.duration);
+    }
+    mainVideo.ontimeupdate = updateProgress;
+    mainVideo.onloadedmetadata = updateProgress;
+    mainVideo.onended = () => {
+      // Auto play next video
+      if (currentVideoIndex < videos.length - 1) {
+        loadVideo(currentVideoIndex + 1);
+      }
+    };
+    progressBar.onclick = (e) => {
+      const rect = progressBar.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const percent = x / rect.width;
+      mainVideo.currentTime = percent * mainVideo.duration;
+    };
+
+    // Time formatting
+    function formatTime(sec) {
+      if (isNaN(sec)) return '0:00';
+      sec = Math.floor(sec);
+      const m = Math.floor(sec / 60);
+      const s = sec % 60;
+      return m + ':' + (s < 10 ? '0' : '') + s;
+    }
+
+    // Keyboard Shortcuts
+    mainVideo.addEventListener('keydown', function(e) {
+      if (e.code === 'Space') {
+        playPauseBtn.click();
+        e.preventDefault();
+      } else if (e.code === 'ArrowLeft') {
+        back10Btn.click();
+        e.preventDefault();
+      } else if (e.code === 'ArrowRight') {
+        forward10Btn.click();
+        e.preventDefault();
+      } else if (e.code === 'KeyF') {
+        fullscreenBtn.click();
+        e.preventDefault();
+      }
+    });
+
+    // Comments
+    let comments = [];
+    function renderComments() {
+      commentList.innerHTML = '';
+      if (pinnedComment) {
+        const div = document.createElement('div');
+        div.className = 'comment';
+        div.innerHTML = `<span class="pin"><i class="fas fa-thumbtack"></i></span> <b>Pinned:</b> ${pinnedComment}`;
+        commentList.appendChild(div);
+      }
+      comments.forEach(c => {
+        const div = document.createElement('div');
+        div.className = 'comment';
+        div.textContent = c;
+        commentList.appendChild(div);
+      });
+    }
+    commentForm.onsubmit = (e) => {
+      e.preventDefault();
+      const val = commentInput.value.trim();
+      if (val) {
+        comments.push(val);
+        renderComments();
+        commentInput.value = '';
+      }
+    };
+    pinCommentBtn.onclick = () => {
+      const val = commentInput.value.trim();
+      if (val) {
+        pinnedComment = val;
+        renderComments();
+        commentInput.value = '';
+      }
+    };
+
+    // Initial Load
+    function init() {
+      renderVideoList();
+      loadVideo(0);
+      renderComments();
+    }
+    window.onload = init;
+
+    // Theme toggle for logo color (reuse)
+    document.addEventListener('DOMContentLoaded', function() {
+      function updateLogoColor() {
+        var body = document.body;
+        var logoSpan = document.querySelector('.logo .tt');
+        if (!logoSpan) return;
+        if (body.classList.contains('dark')) {
+          logoSpan.style.color = 'white';
+        } else {
+          logoSpan.style.color = 'black';
+        }
+      }
+      updateLogoColor();
+      var themeToggle = document.getElementById('hide_checkbox');
+      if (themeToggle) {
+        themeToggle.addEventListener('change', function() {
+          if (themeToggle.checked) {
+            document.body.classList.add('dark');
+          } else {
+            document.body.classList.remove('dark');
+          }
+          updateLogoColor();
+        });
+      }
+    });
+  </script>
+</body>
+</html>
