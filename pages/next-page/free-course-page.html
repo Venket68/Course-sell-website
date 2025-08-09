@@ -4,11 +4,20 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Free Courses Page</title>
+  <link rel="stylesheet" href="/course-selling-website-master/style.css">
   <link rel="stylesheet" href="../../styles/universal.css" />
   <link rel="stylesheet" href="../../styles/colors.css" />
   <link rel="stylesheet" href="../../styles/navbar.css" />
   <link rel="stylesheet" href="../../styles/footer.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+  integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+  crossorigin="anonymous"
+  referrerpolicy="no-referrer" />
+  <link rel="icon" href="https://icon-library.com/images/online-learning-icon/online-learning-icon-6.jpg" type="image/x-icon">
+
   <style>
     body {
       background: var(--primary-bg, #181818);
@@ -129,13 +138,47 @@
 <body class="dark">
   <!-- Navbar (reuse from previous page) -->
   <header>
-    <nav style="position: fixed; top: 0; width: 100%; z-index: 10;">
+    <nav style="position: fixed; top: 0; width: 100%;">
       <div class="nav-bar">
         <li class="logo">
-          <a href="/index.html">
-            <span class="tt" style="color: white;font-size:xx-large;">LearnNow</span>
+          <a href="#">
+            <!-- <img id="topLogo" src="update/download (1).png" alt="CoderClas Main Logo" /> -->
+             <span class="tt" style="color: white;font-size:xx-large;">LearnNow</span>
+          <script>
+            // Toggle logo text color based on theme
+            document.addEventListener('DOMContentLoaded', function() {
+              function updateLogoColor() {
+                var body = document.body;
+                var logoSpan = document.querySelector('.logo .tt');
+                if (!logoSpan) return;
+                if (body.classList.contains('dark')) {
+                  logoSpan.style.color = 'white';
+                } else {
+                  logoSpan.style.color = 'black';
+                }
+              }
+
+              // Initial set
+              updateLogoColor();
+
+              // Listen for theme toggle (checkbox)
+              var themeToggle = document.getElementById('hide_checkbox');
+              if (themeToggle) {
+                themeToggle.addEventListener('change', function() {
+                  // Toggle dark class on body
+                  if (themeToggle.checked) {
+                    document.body.classList.add('dark');
+                  } else {
+                    document.body.classList.remove('dark');
+                  }
+                  updateLogoColor();
+                });
+              }
+            });
+          </script>
           </a>
         </li>
+
         <div style="display: flex;">
           <div class="wrapper">
             <input type="checkbox" id="hide_checkbox" checked>
@@ -143,7 +186,7 @@
               <span class="toggle-button">
                 <span class="crater crater-1"></span>
                 <span class="crater crater-2"></span>
-                <span class="crater crater-3"></span>
+                <span class="crater crater-3"></span>   
                 <span class="crater crater-4"></span>
                 <span class="crater crater-5"></span>
                 <span class="crater crater-6"></span>
@@ -159,27 +202,30 @@
               <span class="star star-8"></span>
             </label>
           </div>
-          <input type="checkbox" id="check" />
-          <span class="menu font-sans">
-            <li>
-              <a class="text-white text-center" href="../../index.html#courses">Courses</a>
-            </li>
-            <li>
-              <a class="text-white text-center" href="/pages/contact us/contact.html">Contact Us</a>
-            </li>
-            <li>
-              <a class="text-white text-center" href="/pages/about us/about.html">About Us</a>
-            </li>
-            <li>
-              <a href="/pages/login/login.html">
-                <button class="btn-design text-bold">Login</button>
-              </a>
-            </li>
-            <label for="check" class="close-menu">
-              <i class="text-white fas fa-times"></i>
-            </label>
-          </span>
-        </div>
+
+
+        <input type="checkbox" id="check" />
+        <span class="menu font-sans">
+          <li>
+            <a class="text-white text-center" href="/index.html">Courses</a>
+          </li>
+          <li><a class="text-white text-center" href="/pages/contact us/contact.html">Contact Us</a></li>
+          <li>
+            <a class="text-white text-center" href="pages/about us/about.html">About Us</a>
+          </li>
+          <li>
+            <a href="pages/login/login.html">
+            <button class="btn-design text-bold">Login</button></a>
+          </li>
+          <label for="check" class="close-menu">
+            <i class="text-white fas fa-times"></i>
+          </label>
+        </span>
+      <li>
+        
+      </li>
+      </div>
+
         <label for="check" class="open-menu">
           <i class="text-white fas fa-bars"></i>
         </label>
@@ -191,22 +237,22 @@
     <h2 style="text-align:center; margin-bottom: 32px; font-size:2rem; letter-spacing:1px;">Free Courses</h2>
     <div class="courses-grid">
       <!-- Card 1 -->
-      <div class="course-card" onclick="window.location.href='Html-css-page.html'">
+      <div class="course-card" onclick="window.location.href='/pages/next-page/java-course-page.html'">
         <span class="icon"><i class="fab fa-html5"></i> <i class="fab fa-css3-alt"></i></span>
-        <div class="course-title">HTML &amp; CSS Mastery</div>
+        <div class="course-title">Java </div>
         <div class="course-desc">
           Learn the building blocks of the web! This course covers everything from basic HTML tags to advanced CSS layouts and animations. Perfect for beginners and those looking to polish their web design skills.
         </div>
-        <a class="course-link" href="Html-css-page.html">Start Learning</a>
+        <a class="course-link" href="/pages/next-page/java-course-page.html">Start Learning</a>
       </div>
       <!-- Card 2 -->
-      <div class="course-card" onclick="window.location.href='javascript-course.html'">
+      <div class="course-card" onclick="window.location.href='/pages/next-page/javascript-course-page.html'">
         <span class="icon"><i class="fab fa-js-square"></i></span>
         <div class="course-title">JavaScript Essentials</div>
         <div class="course-desc">
           Dive into JavaScript, the language of the web! This course takes you from the basics to interactive web features, DOM manipulation, and real-world projects. No prior coding experience required.
         </div>
-        <a class="course-link" href="javascript-course.html">Start Learning</a>
+        <a class="course-link" href="/pages/next-page/javascript-course-page.html">Start Learning</a>
       </div>
     </div>
   </div>
@@ -237,5 +283,8 @@
       }
     });
   </script>
+ 
+  <script src="/course-selling-website-master/script.js"></script>
+  
 </body>
 </html>

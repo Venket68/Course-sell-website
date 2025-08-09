@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Online Course Platform - Black Theme</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="/course-selling-website-master/style.css">
+  <link rel="stylesheet" href="../../styles/universal.css" />
+  <link rel="stylesheet" href="../../styles/colors.css" />
+  <link rel="stylesheet" href="../../styles/navbar.css" />
+  <link rel="stylesheet" href="../../styles/footer.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
+  <link rel="stylesheet" href="all-style-page.css">
+  
+  <link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+  integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+  crossorigin="anonymous"
+  referrerpolicy="no-referrer" />
+  <link rel="icon" href="https://icon-library.com/images/online-learning-icon/online-learning-icon-6.jpg" type="image/x-icon">
+
+  <style>
+   
+  </style>
+</head>
+<body>
+  <header>
+    <nav style="position: fixed; top: 0; width: 100%;">
+      <div class="nav-bar">
+        <li class="logo">
+          <a href="#">
+            <!-- <img id="topLogo" src="update/download (1).png" alt="CoderClas Main Logo" /> -->
+             <span class="tt" style="color: white;font-size:xx-large;">LearnNow</span>
+          <script>
+            // Toggle logo text color based on theme
+            document.addEventListener('DOMContentLoaded', function() {
+              function updateLogoColor() {
+                var body = document.body;
+                var logoSpan = document.querySelector('.logo .tt');
+                if (!logoSpan) return;
+                if (body.classList.contains('dark')) {
+                  logoSpan.style.color = 'white';
+                } else {
+                  logoSpan.style.color = 'black';
+                }
+              }
+
+              // Initial set
+              updateLogoColor();
+
+              // Listen for theme toggle (checkbox)
+              var themeToggle = document.getElementById('hide_checkbox');
+              if (themeToggle) {
+                themeToggle.addEventListener('change', function() {
+                  // Toggle dark class on body
+                  if (themeToggle.checked) {
+                    document.body.classList.add('dark');
+                  } else {
+                    document.body.classList.remove('dark');
+                  }
+                  updateLogoColor();
+                });
+              }
+            });
+          </script>
+          </a>
+        </li>
+
+        <div style="display: flex;">
+          <div class="wrapper">
+            <input type="checkbox" id="hide_checkbox" checked>
+            <label for="hide_checkbox" class="toggle">
+              <span class="toggle-button">
+                <span class="crater crater-1"></span>
+                <span class="crater crater-2"></span>
+                <span class="crater crater-3"></span>   
+                <span class="crater crater-4"></span>
+                <span class="crater crater-5"></span>
+                <span class="crater crater-6"></span>
+                <span class="crater crater-7"></span>
+              </span>
+              <span class="star star-1"></span>
+              <span class="star star-2"></span>
+              <span class="star star-3"></span>
+              <span class="star star-4"></span>
+              <span class="star star-5"></span>
+              <span class="star star-6"></span>
+              <span class="star star-7"></span>
+              <span class="star star-8"></span>
+            </label>
+          </div>
+
+
+        <input type="checkbox" id="check" />
+        <span class="menu font-sans">
+          <li>
+            <a class="text-white text-center" href="/index.html">Courses</a>
+          </li>
+          <li><a class="text-white text-center" href="/pages/contact us/contact.html">Contact Us</a></li>
+          <li>
+            <a class="text-white text-center" href="/pages/about us/about.html">About Us</a>
+          </li>
+          <li>
+            <a href="/pages/login/login.html">
+            <button class="btn-design text-bold">Login</button></a>
+          </li>
+          <label for="check" class="close-menu">
+            <i class="text-white fas fa-times"></i>
+          </label>
+        </span>
+      <li>
+        
+      </li>
+      </div>
+
+        <label for="check" class="open-menu">
+          <i class="text-white fas fa-bars"></i>
+        </label>
+      </div>
+    </nav>
+  </header>
+  
+  <div class="container">
+    <!-- Left: Video Section -->
+    <div class="video-section">
+      <div class="video-title" id="videoTitle">Course Title</div>
+      <div class="video-player-box">
+        <!-- 
+          To add your own YouTube videos, update the "src" attribute in the videos array in the script below.
+          Example: "https://www.youtube.com/embed/VIDEO_ID"
+        -->
+        <iframe id="mainVideo" class="video-iframe" src="" allowfullscreen></iframe>
+        <div class="controls-bar">
+          <button id="skipBackBtn" title="Skip Backward 10s"><i class="fas fa-backward"></i></button>
+          <button id="playPauseBtn" title="Play/Pause"><i class="fas fa-play"></i></button>
+          <button id="skipForwardBtn" title="Skip Forward 10s"><i class="fas fa-forward"></i></button>
+          <input type="range" id="volumeSlider" class="volume-slider" min="0" max="100" value="100" title="Volume">
+          <button id="fullscreenBtn" title="Fullscreen"><i class="fas fa-expand"></i></button>
+          <button id="nextVideoBtn" class="next-btn" title="Next Video"><i class="fas fa-step-forward"></i> Next</button>
+        </div>
+      </div>
+      <div class="progress-bar" id="progressBar">
+        <div class="progress" id="progress"></div>
+      </div>
+      <div class="time-labels">
+        <span id="currentTime">0:00</span>
+        <span id="duration">0:00</span>
+      </div>
+      <!-- Comment Section -->
+      <div class="comment-section">
+        <h3>Comments <i class="fas fa-comments"></i></h3>
+        <div class="comment-list" id="commentList"></div>
+        <form class="comment-form" id="commentForm" autocomplete="off">
+          <input type="text" id="commentInput" placeholder="Add a comment..." maxlength="120" required>
+          <button type="submit"><i class="fas fa-paper-plane"></i></button>
+        </form>
+      </div>
+    </div>
+    <!-- Right: Video List -->
+    <div class="side-list-section">
+      <h3>Next Videos</h3>
+      <div class="video-list" id="videoList"></div>
+    </div>
+  </div>
+  <script src="javascript-course-page.js"></script>
+  <script src="/course-selling-website-master/script.js"></script>
+  <!--
+    HOW TO ADD YOUR YOUTUBE VIDEOS:
+    1. Scroll to the <script> section above.
+    2. Find the "const videos = [ ... ]" array.
+    3. Replace the "src" value with your YouTube embed link (format: https://www.youtube.com/embed/VIDEO_ID).
+    4. Change the "title" to your video title.
+    5. You can add/remove objects in the array for more/less videos.
+    6. To change video/side list size, edit --video-width, --video-height, --side-list-width in the :root CSS above.
+  -->
+</body>
+</html>
